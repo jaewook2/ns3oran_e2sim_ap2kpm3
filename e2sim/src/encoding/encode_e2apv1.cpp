@@ -536,7 +536,7 @@ void encoding::generate_e2apv1_subscription_request(E2AP_PDU *e2ap_pdu) {
 
     printf("sub3\n");
 
-    RICaction_ToBeSetup_ItemIEs_t *action_item_ies = (RICaction_ToBeSetup_ItemIEs_t *)calloc(1, sizeof(RICaction_ToBeSetup_Item_t));                                                                                       sizeof(RICaction_ToBeSetup_Item_t));
+    RICaction_ToBeSetup_ItemIEs_t *action_item_ies = (RICaction_ToBeSetup_ItemIEs_t *)calloc(1, sizeof(RICaction_ToBeSetup_Item_t));
     action_item_ies->id = proto_id;
     action_item_ies->criticality = 0;
 
@@ -1235,8 +1235,8 @@ void encoding::generate_e2apv2_reset_response(E2AP_PDU *e2ap_pdu) {
 
     ASN_SEQUENCE_ADD(&e2ap_pdu->choice.successfulOutcome->value.choice.ResetResponse.protocolIEs.list, rrIEs2);
 }
-  
-void encoding::generate_e2apv2_config_update(E2AP_PDU_t *e2ap_pdu){
+
+void encoding::generate_e2apv2_config_update(E2AP_PDU_t *e2ap_pdu) {
       // txid
     auto *e2txidIE = (E2nodeConfigurationUpdate_IEs_t *)calloc(1, sizeof(E2nodeConfigurationUpdate_IEs_t));
     e2txidIE->id = ProtocolIE_ID_id_TransactionID;

@@ -139,13 +139,13 @@ int sctp_start_client(const char *server_ip_str, const int server_port, const in
     server_addr_len    = sizeof(server6_addr);
   }
   else {
-    LOG_E("inet_pton() server, error message: %s", strerror(errno));
+    LOG_E("inet_pton() server");
     exit(EXIT_FAILURE);
   }
 
   if((client_fd = socket(AF_INET6, SOCK_STREAM, IPPROTO_SCTP)) == -1)
   {
-     LOG_E("Socket creation, error message: %s", strerror(errno));
+     LOG_E("Socket creation, error");
      exit(EXIT_FAILURE);
   }
 
@@ -162,12 +162,12 @@ int sctp_start_client(const char *server_ip_str, const int server_port, const in
   //Bind before connect
   auto optval = 1;
   if(setsockopt(client_fd, SOL_SOCKET, SO_REUSEPORT, &optval, sizeof optval) != 0 ){
-    LOG_E("setsockopt port, error message: %s", strerror(errno));
+    LOG_E("setsockopt port, error");
     exit(EXIT_FAILURE);
   }
 
   if (setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval) != 0) {
-    LOG_E("setsockopt addr, error message: %s", strerror(errno));
+    LOG_E("setsockopt addr, error");
     exit(EXIT_FAILURE);
   }
 
@@ -185,7 +185,7 @@ int sctp_start_client(const char *server_ip_str, const int server_port, const in
 
   LOG_I("[SCTP] Connecting to server at %s:%d ...", server_ip_str, server_port);
   if(connect(client_fd, server_addr, server_addr_len) == -1) {
-    LOG_E("[SCTP] Connection error: %s", strerror(errno));
+    LOG_E("[SCTP] Connection error");
     exit(EXIT_FAILURE);
   }
   assert(client_fd != 0);
@@ -242,7 +242,7 @@ int sctp_send_data(int &socket_fd, sctp_buffer_t &data)
   int sent_len = send(socket_fd, data.buffer, data.len, 0);
 
   if(sent_len == -1) {
-    LOG_E("[SCTP] sctp_send_data, error message: %s", strerror(errno));
+    LOG_E("[SCTP] sctp_send_data, error");
     exit(EXIT_FAILURE);
   }
 
@@ -281,7 +281,7 @@ int sctp_receive_data(int &socket_fd, sctp_buffer_t &data)
 
   if(recv_len == -1)
   {
-    LOG_E("[SCTP] recv: %s", strerror(errno));
+    LOG_E("[SCTP] recv");
     exit(EXIT_FAILURE);
   }
   else if (recv_len == 0)
@@ -289,7 +289,7 @@ int sctp_receive_data(int &socket_fd, sctp_buffer_t &data)
     LOG_E("[SCTP] Connection closed by remote peer");
     if(close(socket_fd) == -1)
     {
-      LOG_E("[SCTP] close, error message: %s", strerror(errno));
+      LOG_E("[SCTP] close, error");
     }
     return -1;
   }
