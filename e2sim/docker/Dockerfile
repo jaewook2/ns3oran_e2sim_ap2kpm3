@@ -14,6 +14,7 @@
 #   limitations under the License.
 #==================================================================================
 
+ARG CONTAINER_PULL_REGISTRY=nexus3.o-ran-sc.org:10001
 FROM nexus3.o-ran-sc.org:10004/o-ran-sc/bldr-ubuntu18-c-go:1.9.0 as buildenv
 RUN mkdir /playpen
 

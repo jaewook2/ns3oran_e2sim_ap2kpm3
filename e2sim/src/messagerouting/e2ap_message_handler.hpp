@@ -31,6 +31,8 @@ extern "C" {
 
 bool e2ap_handle_sctp_data(int &socket_fd, sctp_buffer_t &data, E2Sim *e2sim);
 
+void e2ap_handle_sctp_data(int &socket_fd, sctp_buffer_t &data, bool xmlenc, E2Sim *e2sim);
+
 void e2ap_handle_X2SetupRequest(E2AP_PDU_t* pdu, int &socket_fd);
 
 void e2ap_handle_X2SetupResponse(E2AP_PDU_t* pdu, int &socket_fd);
@@ -46,6 +48,8 @@ void e2ap_handle_RICSubscriptionRequest_securityDemo(E2AP_PDU_t* pdu, int &socke
 void e2ap_handle_ResourceStatusRequest(E2AP_PDU_t* pdu, int &socket_fd);
 
 void e2ap_handle_E2SeviceRequest(E2AP_PDU_t* pdu, int &socket_fd, E2Sim *e2sim);
+
+void e2ap_send_e2nodeConfigUpdate(int &socket_fd);
 
 void e2ap_handle_RICControlRequest(E2AP_PDU_t *pPdu, int &fd, E2Sim *e2sim);
 

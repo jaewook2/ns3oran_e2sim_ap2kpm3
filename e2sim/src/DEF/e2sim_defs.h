@@ -23,12 +23,14 @@
 // #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
 
 #define VERSION             "1.2.0"      //May 2019
 #define DEFAULT_SCTP_IP     "127.0.0.1"
 #define X2AP_PPID           (452984832) //27 = 1b, PPID = 1b000000(hex) -> 452984832(dec)
 #define X2AP_SCTP_PORT      36421
-#define RIC_SCTP_SRC_PORT   38472
+#define RIC_SCTP_SRC_PORT   36422 // change from 38472 ==> 36422
 #define MAX_SCTP_BUFFER     10000
 #define WORKDIR_ENV         "E2SIM_DIR" //environment variable
 
@@ -44,12 +46,58 @@
 #define LOG_LEVEL_UNCOND    0
 
 
-char* time_stamp();
+char* time_stamp(void);
 
-#define LOG_I(...) if(LOG_LEVEL>=LOG_LEVEL_INFO){printf("[%s] ", "INFO ");printf(__VA_ARGS__);printf("\n");}
-#define LOG_E(...) if(LOG_LEVEL>=LOG_LEVEL_ERROR){printf("[%s] ", "ERROR");printf(__VA_ARGS__);printf("\n");}
-#define LOG_D(...) if(LOG_LEVEL>=LOG_LEVEL_DEBUG){printf("[%s] ", "DEBUG");printf(__VA_ARGS__);printf("\n");}
-#define LOG_U(...) if(LOG_LEVEL>=LOG_LEVEL_UNCOND){printf("[%s] ", "UNCON");printf(__VA_ARGS__);printf("\n");}
+//#define LOG_I(...) if(LOG_LEVEL>=LOG_LEVEL_INFO){printf("[%s] ", "INFO ");printf(__VA_ARGS__);printf("\n");}
+//#define LOG_E(...) if(LOG_LEVEL>=LOG_LEVEL_ERROR){printf("[%s] ", "ERROR");printf(__VA_ARGS__);printf("\n");}
+//#define LOG_D(...) if(LOG_LEVEL>=LOG_LEVEL_DEBUG){printf("[%s] ", "DEBUG");printf(__VA_ARGS__);printf("\n");}
+//#define LOG_U(...) if(LOG_LEVEL>=LOG_LEVEL_UNCOND){printf("[%s] ", "UNCON");printf(__VA_ARGS__);printf("\n");}
+
+#define LOG_I(format, ...) \
+    do { \
+        const char *file = __FILE__; \
+        const char *fileName = strrchr(file, '/'); \
+        if (fileName != NULL) { \
+            fileName++; \
+        } \
+        else { \
+            fileName = file; \
+        } \
+        fprintf(stderr, "[%s:%d] [INFO] ", fileName, __LINE__); \
+        fprintf(stderr, format, ##__VA_ARGS__); \
+        fprintf(stderr, "\n"); \
+    } while (0);
+
+#define LOG_D(format, ...) \
+    do { \
+        const char *file = __FILE__; \
+        const char *fileName = strrchr(file, '/'); \
+        if (fileName != NULL) { \
+            fileName++; \
+        } \
+        else { \
+            fileName = file; \
+        } \
+        fprintf(stderr, "[%s:%d] [DEBUG] ", fileName, __LINE__); \
+        fprintf(stderr, format, ##__VA_ARGS__); \
+        fprintf(stderr, "\n"); \
+    } while (0);
+
+#define LOG_E(format, ...) \
+    do { \
+        const char *file = __FILE__; \
+        const char *fileName = strrchr(file, '/'); \
+        if (fileName != NULL) { \
+            fileName++; \
+        } \
+        else { \
+            fileName = file; \
+        } \
+        fprintf(stderr, "[%s:%d] [ERROR] ", fileName, __LINE__); \
+        fprintf(stderr, format, ##__VA_ARGS__); \
+        fprintf(stderr, "\n"); \
+    } while (0);
+
 
 typedef struct SCTP_DATA {
   unsigned char *data;
@@ -66,7 +114,7 @@ typedef struct {
   int   server_port;
   char* gnb_id;
   int client_port;
-  char* plmn_id;
+  char* plmn_id; // 없어도 무방?
 } options_t;
 
 options_t read_input_options(int argc, char *argv[]);

@@ -24,7 +24,6 @@ asn_TYPE_operation_t asn_OP_OBJECT_IDENTIFIER = {
     0,
 #endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     OCTET_STRING_compare,   /* Implemented in terms of a string comparison */
-    OCTET_STRING_copy,      /* Implemented in terms of a string copy */
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     ber_decode_primitive,
     der_encode_primitive,
@@ -40,10 +39,8 @@ asn_TYPE_operation_t asn_OP_OBJECT_IDENTIFIER = {
     0,
 #endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
-    OBJECT_IDENTIFIER_decode_jer,
     OBJECT_IDENTIFIER_encode_jer,
 #else
-    0,
     0,
 #endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -91,9 +88,6 @@ asn_TYPE_descriptor_t asn_DEF_OBJECT_IDENTIFIER = {
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
         0,
 #endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
-#if !defined(ASN_DISABLE_JER_SUPPORT)
-        0,
-#endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
         OBJECT_IDENTIFIER_constraint
     },
     0, 0,  /* No members */

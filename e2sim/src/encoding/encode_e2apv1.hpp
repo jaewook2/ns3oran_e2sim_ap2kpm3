@@ -22,13 +22,13 @@
 #define ENCODE_E2APV1_HPP
 
 #include <vector>
-#include <e2sim.hpp>
 
 
 extern "C" {
 
 #include "E2AP-PDU.h"
 #include "OCTET_STRING.h"
+#include "PrintableString.h"
 
 }
 
@@ -38,6 +38,7 @@ namespace encoding {
     long ranFunctionId;
     OCTET_STRING_t *ranFunctionDesc;
     long ranFunctionRev;
+    PrintableString_t *ranFunctionOId;
   };
   
   long get_function_id_from_subscription(E2AP_PDU_t *e2ap_pdu);
@@ -66,6 +67,12 @@ namespace encoding {
   long get_function_id_from_control_request(E2AP_PDU_t *pdu);
 
   OCTET_STRING_t most_copy_src_ostring_to_dst_ostring ();
+
+  void generate_e2apv1_setup_request_parameterized(E2AP_PDU_t *setup_req_pdu, std::vector<ran_func_info> all_funcs);
+ 
+  void generate_e2apv2_reset_request(E2AP_PDU_t *e2ap_pdu);
+
+  void generate_e2apv2_reset_response(E2AP_PDU_t *e2ap_pdu);
 }
 
 #endif

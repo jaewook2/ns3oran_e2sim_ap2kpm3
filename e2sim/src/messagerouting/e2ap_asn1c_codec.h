@@ -43,6 +43,8 @@ int e2ap_asn1c_encode_pdu(E2AP_PDU_t* pdu, unsigned char **buffer);
 
 struct asn_dec_rval_s e2ap_asn1c_decode_pdu(E2AP_PDU_t* pdu, enum asn_transfer_syntax syntax, unsigned char *buffer, int len);
 
-long e2ap_asn1c_get_procedureCode(E2AP_PDU_t* pdu);
+void e2ap_asn1c_decode_pdu(E2AP_PDU_t* pdu, unsigned char *buffer, int len);
+
+int e2ap_asn1c_get_procedureCode(E2AP_PDU_t* pdu);
 
 #endif

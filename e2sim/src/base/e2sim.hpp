@@ -64,9 +64,8 @@ private:
 
     std::unordered_map<long, OCTET_STRING_t*> ran_functions_registered;
     std::unordered_map<long, SubscriptionCallback> subscription_callbacks;
-    std::unordered_map<long, SmCallback> sm_callbacks;
-
-    std::unordered_map<long, CallbackFunction> callbackfunctions;
+    std::unordered_map<long, SmCallback> sm_callbacks; //for ns3?
+    std::unordered_map<long, CallbackFunction> callbackfunctions; //for ns3?
     int client_fd {0};
     void wait_for_sctp_data();
 

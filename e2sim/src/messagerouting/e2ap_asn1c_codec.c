@@ -21,7 +21,7 @@
 
 void e2ap_asn1c_print_pdu(const E2AP_PDU_t* pdu)
 {
-    asn1c_xer_print(&asn_DEF_E2AP_PDU,(void*) pdu);
+  xer_fprint(stdout, &asn_DEF_E2AP_PDU, pdu);
 }
 
 void asn1c_xer_print(asn_TYPE_descriptor_t *typeDescriptor, void *data)
@@ -147,11 +147,11 @@ int e2ap_asn1c_encode_pdu(E2AP_PDU_t* pdu, unsigned char **buffer)
         LOG_D("**[E2AP ASN] Encoded succesfully, encoded size = %d", len);
     }
 
-  ASN_STRUCT_FREE_CONTENTS_ONLY(asn_DEF_E2AP_PDU, pdu);
+    ASN_STRUCT_FREE(asn_DEF_E2AP_PDU, pdu);
 
   return len;
 }
-
+// To be deleted by JLEE
 struct asn_dec_rval_s e2ap_asn1c_decode_pdu(E2AP_PDU_t *pdu, enum asn_transfer_syntax syntax, unsigned char *buffer, int len) {
     asn_dec_rval_t dec_ret;
     assert(buffer != NULL);
@@ -166,9 +166,26 @@ struct asn_dec_rval_s e2ap_asn1c_decode_pdu(E2AP_PDU_t *pdu, enum asn_transfer_s
     }
 }
 
-long e2ap_asn1c_get_procedureCode(E2AP_PDU_t* pdu)
+void e2ap_asn1c_decode_pdu(E2AP_PDU_t* pdu, unsigned char *buffer, int len)
 {
-  long procedureCode = -1;
+  asn_dec_rval_t dec_ret;
+
+  assert(buffer != NULL);
+
+  dec_ret = aper_decode(NULL, &asn_DEF_E2AP_PDU, (void **)&pdu, buffer, len, 0, 0);
+
+  if (dec_ret.code != RC_OK) {
+    LOG_E("[E2AP ASN] Failed to decode pdu");
+    exit(1);
+  }
+  else {
+    LOG_D("[E2AP ASN] Decoded succesfully");
+  }
+}
+
+int e2ap_asn1c_get_procedureCode(E2AP_PDU_t* pdu)
+{
+  int procedureCode = -1;
 
   switch(pdu->present)
   {

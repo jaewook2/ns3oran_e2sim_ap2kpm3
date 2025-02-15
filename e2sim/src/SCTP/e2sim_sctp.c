@@ -101,7 +101,7 @@ int sctp_start_client(const char *server_ip_str, const int server_port)
   return client_fd;
 
 }
-
+// 없는것것
 int sctp_close_clinet_connection(int client_fd) {
   if(close(client_fd) < 0) {
     return 0;

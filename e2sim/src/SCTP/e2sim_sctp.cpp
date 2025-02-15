@@ -29,7 +29,14 @@
 
 #include "e2sim_sctp.hpp"
 
-#include <cerrno>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/sctp.h>
+#include <signal.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int sctp_start_server(const char *server_ip_str, const int server_port)
 {
@@ -103,7 +110,7 @@ int sctp_start_server(const char *server_ip_str, const int server_port)
 
   return server_fd;
 }
-
+// JLEE FOR NS-O-RAN?
 int sctp_start_client(const char *server_ip_str, const int server_port, const int client_port)
 {
   int client_fd;
@@ -187,7 +194,7 @@ int sctp_start_client(const char *server_ip_str, const int server_port, const in
 
   return client_fd;
 }
-
+// For ns-oran?
 int sctp_close_clinet_connection(int client_fd) {
   if(close(client_fd) < 0) {
     return 0;
@@ -205,7 +212,7 @@ int sctp_accept_connection(const char *server_ip_str, const int server_fd)
 
   //Blocking call
   client_fd = accept(server_fd, &client_addr, &client_addr_size);
-
+  fprintf(stderr, "client fd is %d\n", client_fd);
   if(client_fd == -1){
     LOG_E("accept()");
     close(client_fd);
@@ -231,10 +238,8 @@ int sctp_accept_connection(const char *server_ip_str, const int server_fd)
 
 int sctp_send_data(int &socket_fd, sctp_buffer_t &data)
 {
-  LOG_D("in sctp send data func\n");
-  LOG_D("data.len is %d", data.len);
+
   int sent_len = send(socket_fd, data.buffer, data.len, 0);
-  LOG_D("after getting sent_len\n");
 
   if(sent_len == -1) {
     LOG_E("[SCTP] sctp_send_data, error message: %s", strerror(errno));
