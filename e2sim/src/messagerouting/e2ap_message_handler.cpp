@@ -28,8 +28,8 @@
 #include "encode_e2apv1.hpp"
 
 
-//#include <unistd.h>
-//#include <ProtocolIE-Field.h>
+#include <unistd.h>
+#include <ProtocolIE-Field.h>
 
 // to be deleted/
 bool e2ap_handle_sctp_data(int &socket_fd, sctp_buffer_t &data, E2Sim *e2sim) {
@@ -79,7 +79,7 @@ bool e2ap_handle_sctp_data(int &socket_fd, sctp_buffer_t &data, E2Sim *e2sim) {
                 case E2AP_PDU_PR_unsuccessfulOutcome: LOG_I("[E2AP] Received SETUP-RESPONSE-FAILURE");
                     break;
 
-                default: LOG_E("[E2AP] Invalid message index=%d in E2AP-PDU", pr_type_of_message);
+                default: LOG_E("[E2AP] Invalid message index=%d in E2AP-PDU", index);
                     break;
             }
             break;
@@ -113,7 +113,7 @@ bool e2ap_handle_sctp_data(int &socket_fd, sctp_buffer_t &data, E2Sim *e2sim) {
                     break;
                 case E2AP_PDU_PR_unsuccessfulOutcome:
                     break;
-                default: LOG_E("[E2AP] Invalid message index=%d in E2AP-PDU", pr_type_of_message);
+                default: LOG_E("[E2AP] Invalid message index=%d in E2AP-PDU", index);
                     break;
             }
             break;
@@ -233,7 +233,7 @@ bool e2ap_handle_sctp_data(int &socket_fd, sctp_buffer_t &data, E2Sim *e2sim) {
                 case E2AP_PDU_PR_unsuccessfulOutcome: LOG_I("[E2AP] Received RIC-SUBSCRIPTION-FAILURE");
                     break;
 
-                default: LOG_E("[E2AP] Invalid message index=%d in E2AP-PDU", pr_type_of_message);
+                default: LOG_E("[E2AP] Invalid message index=%d in E2AP-PDU", index);
                     break;
             }
             break;

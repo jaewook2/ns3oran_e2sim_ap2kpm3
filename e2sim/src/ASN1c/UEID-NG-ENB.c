@@ -7,7 +7,7 @@
 
 #include "UEID-NG-ENB.h"
 
-#include "GlobalNgENB-ID.h"
+#include "GlobalNgENB-ID1.h"
 #include "GlobalNGRANNodeID.h"
 asn_TYPE_member_t asn_MBR_UEID_NG_ENB_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct UEID_NG_ENB, amf_UE_NGAP_ID),

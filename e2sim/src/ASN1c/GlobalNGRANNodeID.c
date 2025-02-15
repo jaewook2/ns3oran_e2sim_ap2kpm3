@@ -7,8 +7,8 @@
 
 #include "GlobalNGRANNodeID.h"
 
-#include "GlobalGNB-ID.h"
-#include "GlobalNgENB-ID.h"
+#include "GlobalGNB-ID1.h"
+#include "GlobalNgENB-ID1.h"
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_GlobalNGRANNodeID_constr_1 CC_NOTUSED = {
 	{ APC_CONSTRAINED | APC_EXTENSIBLE,  1,  1,  0,  1 }	/* (0..1,...) */,

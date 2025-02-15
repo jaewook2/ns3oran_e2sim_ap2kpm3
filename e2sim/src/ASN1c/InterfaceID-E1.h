@@ -12,7 +12,7 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "GlobalGNB-ID.h"
+#include "GlobalGNB-ID1.h"
 #include "E2SM-COMMON-IEs_GNB-CU-UP-ID.h"
 #include "constr_SEQUENCE.h"
 

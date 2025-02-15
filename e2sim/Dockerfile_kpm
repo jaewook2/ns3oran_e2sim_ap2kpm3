@@ -66,7 +66,7 @@ RUN apt-get update \
 	nmap \
   && apt-get clean
 
-COPY /src/ASN1c/ /playpen/e2sim/asn1c
+COPY src/ASN1c/ /playpen/e2sim/ASN1c
 COPY e2sm_examples/ /playpen/e2sim/e2sm_examples
 COPY src/ /playpen/e2sim/src
 COPY CMakeLists.txt /playpen/e2sim
@@ -84,12 +84,12 @@ RUN cp nlohmann_json_release/json.hpp /usr/local/include/nlohmann
 COPY ./e2sm_examples/kpm_e2sm/ /playpen/src/
 COPY ./src/ASN1c /playpen/src/ASN1c/
 RUN wc -l /playpen/src/reports.json
- RUN cd /playpen/src && \
- 		rm -fr .build &&\
-		mkdir  .build && \
-		cd .build && \
-		cmake .. && \
-		make install
+RUN cd /playpen/src && \
+	rm -fr .build &&\
+	mkdir  .build && \
+	cd .build && \
+	cmake .. && \
+	make install
 
 #CMD sleep 100000000000
 #CMD kpm_sim 10.111.138.172 32222

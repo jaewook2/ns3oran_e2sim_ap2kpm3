@@ -72,7 +72,7 @@ void encode_kpm_function_description(E2SM_KPM_RANfunction_Description_t* ranfunc
 
   LOG_I("Initialize event trigger style list structure");
   
-
+/*
   RIC_EventTriggerStyle_List_t *trigger_style =
     (RIC_EventTriggerStyle_List_t*)calloc(1, sizeof(RIC_EventTriggerStyle_List_t));
   trigger_style->ric_EventTriggerStyle_Type = 1;
@@ -81,7 +81,15 @@ void encode_kpm_function_description(E2SM_KPM_RANfunction_Description_t* ranfunc
   memcpy(trigger_style->ric_EventTriggerStyle_Name.buf, style_name, strlen((char*)style_name));
   trigger_style->ric_EventTriggerStyle_Name.size = strlen((char*)style_name);
   trigger_style->ric_EventTriggerFormat_Type = 1;
-
+*/
+  RIC_EventTriggerStyle_Item_t* trigger_style =
+  (RIC_EventTriggerStyle_Item_t*)calloc(1, sizeof(RIC_EventTriggerStyle_Item_t));
+  trigger_style->ric_EventTriggerStyle_Type = 1;
+  uint8_t* style_name = (uint8_t*)"Periodic Report";
+  trigger_style->ric_EventTriggerStyle_Name.buf = (uint8_t*)calloc(1, strlen((char*)style_name));
+  memcpy(trigger_style->ric_EventTriggerStyle_Name.buf, style_name, strlen((char*)style_name));
+  trigger_style->ric_EventTriggerStyle_Name.size = strlen((char*)style_name);
+  trigger_style->ric_EventTriggerFormat_Type = 1;
 
   ranfunc_desc->ric_EventTriggerStyle_List =
     (E2SM_KPM_RANfunction_Description::E2SM_KPM_RANfunction_Description__ric_EventTriggerStyle_List*)

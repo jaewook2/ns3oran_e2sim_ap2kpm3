@@ -9,7 +9,7 @@
 
 #include "UEID-GNB-CU-F1AP-ID-List.h"
 #include "UEID-GNB-CU-CP-E1AP-ID-List.h"
-#include "GlobalGNB-ID.h"
+#include "GlobalGNB-ID1.h"
 #include "GlobalNGRANNodeID.h"
 asn_TYPE_member_t asn_MBR_UEID_GNB_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct UEID_GNB, amf_UE_NGAP_ID),

@@ -363,7 +363,7 @@ void encoding::generate_e2apv1_subscription_delete_acknowledge(E2AP_PDU_t *delet
 }
 
 // This is not in K
-/*
+
 void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_pdu, 
                                                     long _reqRequestorId, 
                                                     long _reqInstanceId, 
@@ -393,7 +393,7 @@ void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_
     ran_func_id_ie->criticality = Criticality_reject;
     ran_func_id_ie->value.present = RICcontrolAcknowledge_IEs__value_PR_RANfunctionID;
     ran_func_id_ie->value.choice.RANfunctionID = *ranFunctionId;
-
+     /*jlee 0215 나중에 check
     // RIC Control status. Mandatory
     // TODO fill
     auto *ric_control_status_ie = (RICcontrolAcknowledge_IEs *) calloc(1, sizeof(RICcontrolAcknowledge_IEs_t));
@@ -403,7 +403,7 @@ void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_
     ric_control_status_ie->criticality = Criticality_reject;
     ric_control_status_ie->value.present = RICcontrolAcknowledge_IEs__value_PR_RICcontrolStatus;
     ric_control_status_ie->value.choice.RICcontrolStatus = *ricControlStatus;
-
+   */
 
     // RIC Control Outcome. Optional
     auto *ric_control_outcome_ie = (RICcontrolAcknowledge_IEs *) calloc(1, sizeof(RICcontrolAcknowledge_IEs_t));
@@ -419,7 +419,7 @@ void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_
     auto *riCcontrolAcknowledge = (RICcontrolAcknowledge_t *) calloc(1, sizeof(RICcontrolAcknowledge_t));
     ASN_SEQUENCE_ADD(&riCcontrolAcknowledge->protocolIEs.list, req_id_ie);
     ASN_SEQUENCE_ADD(&riCcontrolAcknowledge->protocolIEs.list, ran_func_id_ie);
-    ASN_SEQUENCE_ADD(&riCcontrolAcknowledge->protocolIEs.list, ric_control_status_ie);
+    //ASN_SEQUENCE_ADD(&riCcontrolAcknowledge->protocolIEs.list, ric_control_status_ie); jlee 0215 나중에 check
     ASN_SEQUENCE_ADD(&riCcontrolAcknowledge->protocolIEs.list, ric_control_outcome_ie);
 
     auto *successOutcome = (SuccessfulOutcome_t *) calloc(1, sizeof(SuccessfulOutcome_t));
@@ -443,7 +443,7 @@ void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_
 
     LOG_D("CHECK ERROR 2\n") ;
 }
-*/
+
 void encoding::generate_e2apv1_setup_response(E2AP_PDU_t *e2ap_pdu) {
 
     E2setupResponseIEs *resp_ies1 = (E2setupResponseIEs_t*)calloc(1, sizeof(E2setupResponseIEs_t));

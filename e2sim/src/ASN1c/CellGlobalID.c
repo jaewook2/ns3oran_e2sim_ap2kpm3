@@ -9,9 +9,11 @@
 
 #include "NRCGI.h"
 #include "EUTRACGI.h"
+/*
 static asn_oer_constraints_t asn_OER_type_CellGlobalID_constr_1 CC_NOTUSED = {
 	{ 0, 0 },
 	-1};
+*/
 asn_per_constraints_t asn_PER_type_CellGlobalID_constr_1 CC_NOTUSED = {
 	{ APC_CONSTRAINED | APC_EXTENSIBLE,  1,  1,  0,  1 }	/* (0..1,...) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
@@ -51,17 +53,18 @@ asn_CHOICE_specifics_t asn_SPC_CellGlobalID_specs_1 = {
 	0, 0,
 	2	/* Extensions start */
 };
+/*
 asn_TYPE_descriptor_t asn_DEF_CellGlobalID = {
 	"CellGlobalID",
 	"CellGlobalID",
 	&asn_OP_CHOICE,
-	0,	/* No effective tags (pointer) */
-	0,	/* No effective tags (count) */
-	0,	/* No tags (pointer) */
-	0,	/* No tags (count) */
+	0,	
+	0,	
+	0,	
+	0,	
 	{ &asn_OER_type_CellGlobalID_constr_1, &asn_PER_type_CellGlobalID_constr_1, CHOICE_constraint },
 	asn_MBR_CellGlobalID_1,
-	2,	/* Elements count */
-	&asn_SPC_CellGlobalID_specs_1	/* Additional specs */
+	2,	
+	&asn_SPC_CellGlobalID_specs_1	
 };
-
+*/

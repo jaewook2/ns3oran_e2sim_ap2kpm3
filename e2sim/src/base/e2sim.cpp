@@ -142,8 +142,8 @@ int E2Sim::run_loop(int argc, char* argv[]){
 }
 
 int E2Sim::run_loop(std::string server_ip, uint16_t server_port, uint16_t local_port, std::string gnb_id, std::string plmn_id) {
-    LOG_U("Start E2 Agent (E2 Simulator)");
-    LOG_U("Current Log level is %d", LOG_LEVEL);
+    LOG_I("Start E2 Agent (E2 Simulator)");
+    LOG_D("Current Log level is %d", LOG_LEVEL);
 
     client_fd = sctp_start_client(server_ip.c_str(), server_port, local_port);
     //auto *pdu_setup = (E2AP_PDU_t *) calloc(1, sizeof(E2AP_PDU));
@@ -225,7 +225,7 @@ int E2Sim::run_loop(std::string server_ip, uint16_t server_port, uint16_t local_
     memcpy(data.buffer, buffer, er.encoded);
     // 0210 **
     
-    if(sctp_send_data(client_fd, data_buf) > 0) {
+    if(sctp_send_data(client_fd, data) > 0) {
         LOG_I("Sent E2-SETUP-REQUEST as E2AP message");
     } else {
         LOG_E("[SCTP] Unable to send E2-SETUP-REQUEST to peer");
@@ -246,13 +246,13 @@ int E2Sim::run_loop(std::string server_ip, uint16_t server_port, uint16_t local_
         //constantly looking for data on SCTP interface
         while (SignalHandler::isRunning())
         {
-            if (sctp_receive_data(client_fd, data_buf) <= 0)
+            if (sctp_receive_data(client_fd, recv_buf) <= 0)
                 break;
 
-            LOG_D("[SCTP] Received new data of size %d", data_buf.len);
+            LOG_D("[SCTP] Received new data of size %d", recv_buf.len);
 
             /* if true means delete reuqest*/
-            if(e2ap_handle_sctp_data(client_fd, data_buf, this)) {
+            if(e2ap_handle_sctp_data(client_fd, recv_buf, this)) {
 
               LOG_D("[SCTP] Application will be terminated");
 

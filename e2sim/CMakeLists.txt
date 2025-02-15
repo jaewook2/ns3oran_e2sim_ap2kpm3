@@ -100,12 +100,12 @@ unset( GPROF CACHE )					# we don't want this to persist
 
 
 
-add_subdirectory(src/ASN1c)
 add_subdirectory(src/DEF)
 add_subdirectory(src/SCTP)
 add_subdirectory(src/messagerouting)
 add_subdirectory(src/base)
 add_subdirectory(src/encoding)
+add_subdirectory(src/ASN1c)
 
 
 add_library( e2sim_shared SHARED
