@@ -190,7 +190,7 @@ void encoding::generate_e2apv1_setup_request_parameterized(E2AP_PDU_t *e2ap_pdu,
     GlobalgNB_ID_t *gnb = (GlobalgNB_ID_t *) calloc(1, sizeof(GlobalgNB_ID_t));
     gnb->plmn_id = *plmnid;
     gnb->gnb_id = *gnbchoice;
-    if (plmn) free(plmn);
+    if (plmnid) free(plmnid);
     if (gnbchoice) free(gnbchoice);
 
     GlobalE2node_gNB_ID_t *e2gnb = (GlobalE2node_gNB_ID_t *) calloc(1, sizeof(GlobalE2node_gNB_ID_t));
@@ -363,6 +363,7 @@ void encoding::generate_e2apv1_subscription_delete_acknowledge(E2AP_PDU_t *delet
 }
 
 // This is not in K
+/*
 void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_pdu, 
                                                     long _reqRequestorId, 
                                                     long _reqInstanceId, 
@@ -408,7 +409,7 @@ void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_
     auto *ric_control_outcome_ie = (RICcontrolAcknowledge_IEs *) calloc(1, sizeof(RICcontrolAcknowledge_IEs_t));
     auto *ricControlOutcome = (RICcontrolOutcome_t *) calloc(1, sizeof(RICcontrolOutcome_t));
     *ricControlOutcome = encoding::most_copy_src_ostring_to_dst_ostring();
-    if(true /* Mostafa - Should add condition depend of control outcome from ca*/) {
+    if(true ) {
         ric_control_outcome_ie->id = ProtocolIE_ID_id_RICcontrolOutcome;
         ric_control_outcome_ie->criticality = Criticality_reject;
         ric_control_outcome_ie->value.present = RICcontrolAcknowledge_IEs__value_PR_RICcontrolOutcome;
@@ -442,7 +443,7 @@ void encoding::generate_e2apv1_ric_control_acknowledge(E2AP_PDU_t *control_resp_
 
     LOG_D("CHECK ERROR 2\n") ;
 }
-
+*/
 void encoding::generate_e2apv1_setup_response(E2AP_PDU_t *e2ap_pdu) {
 
     E2setupResponseIEs *resp_ies1 = (E2setupResponseIEs_t*)calloc(1, sizeof(E2setupResponseIEs_t));
@@ -1018,7 +1019,7 @@ void encoding::generate_e2apv1_indication_request_parameterized(E2AP_PDU *e2ap_p
     char error_buf[300] = {0, };
     size_t errlen = 0;  
 
-    int ret = asn_check_constraints(&asn_DEF_E2AP_PDU, e2ap_pdu, errbuff, &errlen);
+    int ret = asn_check_constraints(&asn_DEF_E2AP_PDU, e2ap_pdu, error_buf, &errlen);
     
     if(ret) {
         LOG_I("Constraint validation of E2AP PDU message failed: %s\n", error_buf);
@@ -1233,9 +1234,9 @@ void encoding::generate_e2apv2_reset_response(E2AP_PDU *e2ap_pdu) {
     rrIEs2->value.choice.TransactionID = 1;
   
     ASN_SEQUENCE_ADD(&e2ap_pdu->choice.successfulOutcome->value.choice.ResetResponse.protocolIEs.list, rrIEs2);
-  }
+    }
 
-  void encoding::generate_e2apv2_config_update(E2AP_PDU_t *e2ap_pdu){
+void encoding::generate_e2apv2_config_update(E2AP_PDU_t *e2ap_pdu){
     // txid
     auto *e2txidIE = (E2nodeConfigurationUpdate_IEs_t *)calloc(1, sizeof(E2nodeConfigurationUpdate_IEs_t));
     e2txidIE->id = ProtocolIE_ID_id_TransactionID;

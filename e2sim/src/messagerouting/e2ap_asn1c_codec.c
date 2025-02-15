@@ -151,8 +151,8 @@ int e2ap_asn1c_encode_pdu(E2AP_PDU_t* pdu, unsigned char **buffer)
 
   return len;
 }
-// To be deleted by JLEE
-struct asn_dec_rval_s e2ap_asn1c_decode_pdu(E2AP_PDU_t *pdu, enum asn_transfer_syntax syntax, unsigned char *buffer, int len) {
+// To be deleted by JLEE name change
+struct asn_dec_rval_s e2ap_asn1c_decode_pdu_old(E2AP_PDU_t *pdu, enum asn_transfer_syntax syntax, unsigned char *buffer, int len) {
     asn_dec_rval_t dec_ret;
     assert(buffer != NULL);
 

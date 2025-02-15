@@ -85,3 +85,6 @@ add_subdirectory( src/ASN1c )
 add_subdirectory( src/kpm )
 
 
+# each binary is built from a subset : To be updated later jlee0213
+#add_subdirectory( asn1c )
+#add_subdirectory( src/kpm )

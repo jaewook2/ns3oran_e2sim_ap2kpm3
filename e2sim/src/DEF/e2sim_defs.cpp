@@ -139,7 +139,7 @@ options_t read_input_options(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {
         LOG_D("argv[%d]: %s", i, argv[i]);
     }
-
+    // to be changed/
     switch (argc) {
         case 6: { // user provided IP, PORT, GNB_ID, CLIENT_PORT and PLMN_ID
             options.plmn_id = strdup(argv[5]);
