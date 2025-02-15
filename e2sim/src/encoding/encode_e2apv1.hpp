@@ -73,6 +73,9 @@ namespace encoding {
   void generate_e2apv2_reset_request(E2AP_PDU_t *e2ap_pdu);
 
   void generate_e2apv2_reset_response(E2AP_PDU_t *e2ap_pdu);
+
+    
+  void generate_e2apv2_config_update(E2AP_PDU_t *e2ap_pdu)
 }
 
 #endif
